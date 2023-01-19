@@ -1,7 +1,7 @@
 const generateToken = require("../config/generateToken");
 const userModel = require("../model/user.model");
 
-const registerUser = async (req, res) => {
+const signupUser = async (req, res) => {
   console.log(req.body);
 
   const { email, password } = req.body;
@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-const authUser = async (req, res) => {
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await userModel.findOne({ email });
 
@@ -48,4 +48,4 @@ const authUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, authUser };
+module.exports = { signupUser, loginUser };
