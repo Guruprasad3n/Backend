@@ -1,25 +1,26 @@
-const mongoose = require("mongoose");
+const {Schema, model} = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = mongoose.Schema(
+const userSchema = new Schema(
   {
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true,
     },
     password: {
       type: String,
       required: true,
     },
-  },
-
-  { timestamps: true }
+  }
 );
 
-userSchema.methods.matchPassword = async function (entertedPassword) {
-  return await bcrypt.compare(entertedPassword, this.password);
+
+const userModel = model("user", userSchema);
+module.exports = userModel;
+
+userSchema.methods.matchingPas = async function (typingPas) {
+  return await bcrypt.compare(typingPas, this.password);
 };
 
 userSchema.pre("save", async function (next) {
@@ -31,6 +32,4 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const userModel = mongoose.model("userdata", userSchema);
 
-module.exports = userModel;
