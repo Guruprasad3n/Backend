@@ -19,9 +19,9 @@ app.get("/", protect, (req, res) => {
 app.post("/signup", signupUser);
 app.post("/login", loginUser);
 
-app.listen(process.env.PORT, async () => {
-  console.log("App is listning at ", process.env.PORT);
+app.listen(8080, async () => {
+  console.log("App is listning at ", 8080);
 
   await connect;
-  console.log("Connected to DB..");
+  console.log("Connected to http://localhost:8080");
 });
